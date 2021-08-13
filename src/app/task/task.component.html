@@ -1,0 +1,67 @@
+<div class="container text-center m-5">
+
+    <h1>TODO App</h1>
+
+    <form [formGroup]="todoForm" class="form-inline">
+        <div class="input-group mb-3">
+            <input type="text" formControlName="task" class="form-control" placeholder="Add new task">
+            <button class="btn btn-secondary" type="reset" id="button-addon2" (click)="send()">Add</button>
+        </div>
+    </form>
+
+
+    <table class="table table-bordered text-left table-striped mt-5">
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Task</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of tdata; let i = index">
+                <td>{{i+1}}</td>
+                <td> {{item.task}}</td>
+                <td class="col-lg-2">
+                    <a class="text-danger" role="button" (click)="delete(item._id)">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                    <a class="text-primary mx-4" role="button" (click)="edit(item)" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <i class="far fa-edit"></i>
+                    </a>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+            <div class="modal-body p-5">
+                <form [formGroup]="updateTodo" class="form-group">
+                    <label>Change your task</label>
+
+                    <input type="text" [hidden]="true" formControlName="id" id="" disabled class="form-control"
+                        placeholder="">
+                    <input type="text" formControlName="task" id="" class="form-control" placeholder="">
+                </form>
+
+            </div>
+
+            <button type="reset" class="btn btn-primary m-5" (click)="update()" data-bs-dismiss="modal">Save
+                changes</button>
+
+
+
+        </div>
+    </div>
+</div>
